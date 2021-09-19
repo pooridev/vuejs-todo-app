@@ -1,25 +1,28 @@
 <template>
   <main class="container">
-    <Header list="this.list" title="Salam" />
+    <Header title="Salam" />
+    <Tasks :tasks="tasks" />
   </main>
   <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
 </template>
 
 <script>
 import Header from './components/Header.vue';
+import Tasks from './components/Tasks.vue';
 
 export default {
   name: 'App',
   components: {
-    Header
+    Header,
+    Tasks
   },
   data() {
     return {
-      list: []
+      tasks: []
     };
   },
   created() {
-    this.list = [
+    this.tasks = [
       {
         id: 1,
         text: 'Doctors Appointment',
