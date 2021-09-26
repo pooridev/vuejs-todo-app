@@ -20,13 +20,15 @@ export default {
 }
 .task {
   background: #f4f4f4;
-  margin: 5px;
+  margin: 5px 0;
   padding: 10px 20px;
   cursor: pointer;
 }
+
 .task.reminder {
   border-left: 5px solid green;
 }
+
 .task h3 {
   display: flex;
   align-items: center;

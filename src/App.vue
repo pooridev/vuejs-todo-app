@@ -1,19 +1,19 @@
 <template>
   <main class="container">
-    <Header title="Salam" />
+    <AddTask :tasks="tasks" :onAddNewTask="addTaskHandler" />
     <Tasks :tasks="tasks" />
   </main>
   <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
 </template>
 
 <script>
-import Header from './components/Header.vue';
+import AddTask from './components/AddTask.vue';
 import Tasks from './components/Tasks.vue';
 
 export default {
   name: 'App',
   components: {
-    Header,
+    AddTask,
     Tasks
   },
   data() {
@@ -21,27 +21,20 @@ export default {
       tasks: []
     };
   },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: 'Doctors Appointment',
-        date: 'March 1st at 2:30pm',
-        reminder: true
-      },
-      {
-        id: 2,
-        text: 'Doctors Appointment',
-        date: 'March 1st at 2:30pm',
-        reminder: true
-      },
-      {
-        id: 3,
-        text: 'Doctors Appointment',
-        date: 'March 1st at 2:30pm',
-        reminder: true
+  methods: {
+    formIsValid: taskText => taskText?.length > 0,
+    addTaskHandler(event, inputValue) {
+      event.preventDefault();
+
+      if (this.formIsValid(inputValue)) {
+        this.tasks.push({
+          text: inputValue,
+          date: new Date().toISOString(),
+          done: false,
+          id: Date.now()
+        });
       }
-    ];
+    }
   }
 };
 </script>
@@ -61,31 +54,8 @@ body {
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  border: 1px solid rgb(38, 38, 38);
   padding: 30px;
   border-radius: 5px;
-}
-.btn {
-  display: inline-block;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: inherit;
-}
-.btn:focus {
-  outline: none;
-}
-.btn:active {
-  transform: scale(0.98);
-}
-.btn-block {
-  display: block;
-  width: 100%;
 }
 </style>
